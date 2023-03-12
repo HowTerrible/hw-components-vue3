@@ -1,0 +1,37 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@js/*": [
+        "src/ts/*"
+      ],
+      "@directives/*": [
+        "src/directives/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@views/*": [
+        "src/views/*"
+      ]
+    }
+  }
+}
