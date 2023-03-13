@@ -14,7 +14,11 @@ componentsRouteConfig.forEach(config => {
 })
 
 const routes: Array<RouteRecordRaw> = [
-  homeRoute
+  homeRoute,
+  {
+    path: "/:catchAll(.*)",
+    redirect: "/"
+  }
 ]
 
 const router = createRouter({
