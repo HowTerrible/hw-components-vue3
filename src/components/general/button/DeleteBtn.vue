@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="less" scoped>
 .hw-deletable-item {
   cursor: default;
   transition-duration: 300ms;
@@ -75,19 +75,19 @@ export default {
   vertical-align: top;
 }
 
-.hw-deletable-item:hover>.hw-delete-item-btn {
+.hw-deletable-item:hover > .hw-delete-item-btn {
   background-color: rgb(255, 98, 36);
 }
 
-.hw-deletable-item:hover>.hw-delete-item-btn::before {
+.hw-deletable-item:hover > .hw-delete-item-btn::before {
   background-color: white;
 }
 
-.hw-deletable-item:hover>.hw-delete-item-btn:hover {
+.hw-deletable-item:hover > .hw-delete-item-btn:hover {
   background-color: white;
 }
 
-.hw-deletable-item:hover>.hw-delete-item-btn:hover::before {
+.hw-deletable-item:hover > .hw-delete-item-btn:hover::before {
   background-color: rgb(255, 98, 36);
 }
 </style>

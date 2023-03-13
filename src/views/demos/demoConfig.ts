@@ -17,6 +17,18 @@ const dataComponents = {
     },
   ]
 }
+const formComponents = {
+  name: "form",
+  path: "/form",
+  children: [
+    {
+      name: "CheckboxDemo",
+      group: "form",
+      path: "/form/HWCheckboxDemo",
+      component: () => import("@views/demos/form/checkbox/CheckboxDemo.vue")
+    },
+  ]
+}
 /** 布局 */
 const layoutComponents = {
   name: "layout",
@@ -60,8 +72,30 @@ const navigationComponents = {
     },
   ]
 }
+
+/** 集成组件 */
+const integratedComponents = {
+  name: "integrated",
+  path: "/integrated",
+  children: [
+    {
+      name: "Questionnaire",
+      path: "/integrated/QuestionnaireDemo",
+      group: "integrated",
+      component: () => import("@views/demos/integrated/questionnaire/QuestionnaireDemo.vue")
+    },
+    // {
+    //   name: "PropertySetter",
+    //   path: "/integrated/HWPropertySetterDemo",
+    //   group: "integrated",
+    //   component: () => import("../views/integrated/PropertySetter/HWPropertySetter")
+    // }
+  ]
+}
 export const componentsRouteConfig: Array<ComponentDemoConfigType> = [
   dataComponents,
+  formComponents,
   layoutComponents,
   navigationComponents,
+  // integratedComponents,
 ]

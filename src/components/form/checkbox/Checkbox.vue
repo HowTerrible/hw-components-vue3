@@ -36,7 +36,7 @@ export default {
       type: [Array, Object, String, Number, Boolean],
       default: false
     },
-    value: [Array, Object, String, Number, Boolean],
+    modelValue: [Array, Object, String, Number, Boolean],
     disabled: {
       type: Boolean,
       default: false
@@ -58,10 +58,6 @@ export default {
       default: false
     }
   },
-  model: {
-    prop: 'value',
-    event: 'value-change'
-  },
   data() {
     return {
       checked: false,
@@ -78,7 +74,7 @@ export default {
   },
   computed: {
     isDataArray() {
-      return Array.isArray(this.value)
+      return Array.isArray(this.modelValue)
     },
     localClass() {
       let result = [this.size]
@@ -92,43 +88,44 @@ export default {
       return result
     }
   },
+  emits: ['check', 'update:modelValue', 'click'],
   watch: {
-    value(newValue, oldValue) {
+    modelValue(newValue, oldValue) {
       this.onValueChanged(newValue, oldValue)
     },
     checked(newValue) {
       if (this.readonly) return
-      this.$emit('checked', newValue, this.trueValue)
+      this.$emit('check', newValue, this.trueValue)
       // 勾选
       if (newValue) {
         // 需要在 勾选时 清掉此标识，否在在勾选 其他项目时会导致此项依然发送了falseValue
         this.clickedItem = false
         if (this.isDataArray) {
           // 如果是value数组，需要在选中时将trueValue添加进去
-          this.value.findIndex((item) => item === this.trueValue) < 0
-            ? this.value.push(this.trueValue)
+          this.modelValue.findIndex((item) => item === this.trueValue) < 0
+            ? this.modelValue.push(this.trueValue)
             : null
-          this.$emit('value-change', this.value)
+          this.$emit('update:modelValue', this.modelValue)
         } else {
-          this.$emit('value-change', this.trueValue)
+          this.$emit('update:modelValue', this.trueValue)
         }
       }
       // 取消勾选
       else {
         if (this.isDataArray) {
-          let targetIndex = this.value.findIndex((v) => v === this.trueValue)
-          targetIndex >= 0 ? this.value.splice(targetIndex, 1) : null
-          this.$emit('value-change', this.value)
+          let targetIndex = this.modelValue.findIndex((v) => v === this.trueValue)
+          targetIndex >= 0 ? this.modelValue.splice(targetIndex, 1) : null
+          this.$emit('update:modelValue', this.modelValue)
         } else {
           // 如果不是当前点击项目也发出此事件
           // 会导致vmodel绑定的所有checkbox都是falseValue的状态
-          this.clickedItem ? this.$emit('value-change', this.falseValue) : null
+          this.clickedItem ? this.$emit('update:modelValue', this.falseValue) : null
         }
       }
     }
   },
   created() {
-    this.onValueChanged(this.value)
+    this.onValueChanged(this.modelValue)
   },
   methods: {
     onValueChanged(newValue) {

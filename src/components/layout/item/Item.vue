@@ -99,13 +99,13 @@ export default {
   }
 
   .fi-title.level1 {
-    font-size: $font-size-h1;
-    font-weight: $font-weight-h1;
+    font-size: @font-size-h1;
+    font-weight: @font-weight-h1;
   }
 
   .fi-title.level2 {
-    font-size: $font-size-h2;
-    font-weight: $font-weight-h2;
+    font-size: @font-size-h2;
+    font-weight: @font-weight-h2;
   }
 
   .fi-content {
