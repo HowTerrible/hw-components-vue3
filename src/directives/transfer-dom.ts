@@ -1,12 +1,15 @@
 // Thanks to: https://github.com/airyland/vux/blob/v2/src/directives/transfer-dom/index.js
 // Thanks to: https://github.com/calebroseland/vue-dom-portal
 /* eslint-disable */
+
+import type { Directive } from "vue";
+
 /**
  * Get target DOM Node
  * @param {(Node|string|Boolean)} [node=document.body] DOM Node, CSS selector, or Boolean
  * @return {Node} The target that the el will be appended to
  */
-function getTarget(node) {
+function getTarget(node: any) {
   if (node === void 0) {
     node = document.body
   }
@@ -14,8 +17,8 @@ function getTarget(node) {
   return node instanceof window.Node ? node : document.querySelector(node)
 }
 
-const directive = {
-  inserted(el, { value }, vnode) {
+const directive: Directive = {
+  mounted(el, { value }, vnode) {
     if (el.dataset && el.dataset.transfer !== 'true') return false;
     el.className = el.className ? el.className + ' v-transfer-dom' : 'v-transfer-dom';
     const parentNode = el.parentNode;
@@ -37,7 +40,7 @@ const directive = {
       }
     }
   },
-  componentUpdated(el, { value }) {
+  updated(el, { value }) {
     if (el.dataset && el.dataset.transfer !== 'true') return false;
     // need to make sure children are done updating (vs. `update`)
     const ref$1 = el.__transferDomData;
@@ -62,7 +65,7 @@ const directive = {
       getTarget(value).appendChild(el);
     }
   },
-  unbind(el) {
+  unmounted(el) {
     if (el.dataset && el.dataset.transfer !== 'true') return false;
     el.className = el.className.replace('v-transfer-dom', '');
     const ref$1 = el.__transferDomData;
@@ -74,4 +77,4 @@ const directive = {
   }
 };
 
-var TransferDom = directive;
+export const TransferDom = directive;

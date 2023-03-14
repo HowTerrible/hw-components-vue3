@@ -49,11 +49,11 @@ const layoutComponents = {
       path: "/layout/CardDemo",
       component: () => import("@views/demos/layout/card/CardDemo.vue")
     },
-    // {
-    //   name: "DrawerDemo",
-    //   path: "/layout/DrawerDemo",
-    //   component: () => import("./layout/HWDrawerDemo.vue")
-    // },
+    {
+      name: "DrawerDemo",
+      path: "/layout/DrawerDemo",
+      component: () => import("@views/demos/layout/drawer/DrawerDemo.vue")
+    },
     // {
     //   name: "DraggableContainerDemo",
     //   path: "/layout/DraggableContainerDemo",

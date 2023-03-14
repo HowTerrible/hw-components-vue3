@@ -12,9 +12,7 @@
     <div class="hw-drawer-header">
       <div class="hw-drawer-title">{{ title }}</div>
       <div class="hw-drawer-btn">
-        <hw-button @click="$emit('open-change', false)"
-          ><i class="fa fa-times" aria-hidden="true"></i
-        ></hw-button>
+        <input type="button" value="×" @click="$emit('update:open', false)" />
       </div>
     </div>
     <div class="hw-drawer-content"><slot></slot></div>
@@ -23,13 +21,9 @@
 </template>
 
 <script>
-import TransferDom from '@directives/transfer-dom'
-import Button from '@components/general/Button'
+import { TransferDom } from '@directives/transfer-dom'
 export default {
   directives: { TransferDom },
-  components: {
-    'hw-button': Button
-  },
   name: 'hw-drawer',
   props: {
     open: {
@@ -54,14 +48,24 @@ export default {
     direction: {
       type: String,
       default: 'bottom',
-      validator: (item) => ['top', 'right', 'bottom-right', 'bottom', 'left'].indexOf(item) > 0
+      validator: (item) =>
+        [
+          'top-left',
+          'top',
+          'top-right',
+          'right-top',
+          'right',
+          'right-bottom',
+          'bottom-right',
+          'bottom',
+          'bottom-left',
+          'left-bottom',
+          'left',
+          'left-top'
+        ].indexOf(item) > 0
     }
   },
-  emits: ['open-change'],
-  model: {
-    prop: 'open',
-    event: 'open-change'
-  }
+  emits: ['update:open']
 }
 </script>
 
@@ -92,15 +96,105 @@ export default {
     flex: 1;
     overflow-y: auto;
   }
-}
 
-.hw-drawer-base.bottom-right {
-  right: 0;
-  bottom: 0;
-  transform: translateY(100%);
-}
+  &.top-right {
+    right: 0;
+    top: 0;
+    transform: translateY(-100%);
+    &.open {
+      transform: translateY(0);
+    }
+  }
+  &.top {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    &.open {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  &.top-left {
+    left: 0;
+    top: 0;
+    transform: translateY(-100%);
+    &.open {
+      transform: translateY(0);
+    }
+  }
 
-.hw-drawer-base.bottom-right.open {
-  transform: translateY(0);
+  &.right-top {
+    right: 0;
+    top: 0;
+    transform: translateX(100%);
+    &.open {
+      transform: translateX(0);
+    }
+  }
+  &.right {
+    right: 0;
+    top: 50%;
+    transform: translateX(100%) translateY(-50%);
+    &.open {
+      transform: translateX(0) translateY(-50%);
+    }
+  }
+  &.right-bottom {
+    right: 0;
+    bottom: 0;
+    transform: translateX(100%);
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  &.bottom-right {
+    right: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    &.open {
+      transform: translateY(0);
+    }
+  }
+  &.bottom {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    &.open {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+  &.bottom-left {
+    left: 0;
+    bottom: 0;
+    transform: translateY(100%);
+    &.open {
+      transform: translateY(0);
+    }
+  }
+
+  &.left-top {
+    left: 0;
+    top: 0;
+    transform: translateX(-100%);
+    &.open {
+      transform: translateX(0);
+    }
+  }
+  &.left {
+    left: 0;
+    top: 50%;
+    transform: translateX(-100%) translateY(-50%);
+    &.open {
+      transform: translateX(0) translateY(-50%);
+    }
+  }
+  &.left-bottom {
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    &.open {
+      transform: translateX(0);
+    }
+  }
 }
 </style>
